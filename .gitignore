@@ -5,6 +5,7 @@ coverage.json
 typechain
 typechain-types
 .solhint.json
+deployments/*
 
 # Hardhat files
 cache
