@@ -19,6 +19,10 @@ const config: HardhatUserConfig = {
             url: GOERLI_RPC_URL,
             accounts: [PRIVATE_KEY],
             chainId: 5
+        },
+        localHost: {
+            url: " http://127.0.0.1:8545/",
+            chainId: 31337
         }
     },
     etherscan: {

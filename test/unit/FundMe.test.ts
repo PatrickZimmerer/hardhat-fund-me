@@ -1,5 +1,7 @@
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { assert, expect } from "chai";
-import { deployments, ethers, network } from "hardhat";
+import { network, deployments, ethers } from "hardhat";
+import { developmentChains } from "../../helper-hardhat-config";
 import { FundMe, MockV3Aggregator } from "../../typechain-types";
 
 describe("FundMe", function() {
