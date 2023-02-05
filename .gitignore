@@ -6,6 +6,7 @@ typechain
 typechain-types
 .solhint.json
 deployments/*
+gas-report.txt
 
 # Hardhat files
 cache

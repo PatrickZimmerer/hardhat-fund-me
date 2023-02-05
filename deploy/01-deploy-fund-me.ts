@@ -6,7 +6,7 @@ module.exports = async ({ getNamedAccounts, deployments, network }) => {
     const { deployer } = await getNamedAccounts();
     const chainId = network.config.chainId;
 
-    console.log("01 ", chainId);
+    console.log("01-deploy FundMe id is:", chainId);
 
     // let ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"];
     let ethUsdPriceFeedAddress;
@@ -16,7 +16,6 @@ module.exports = async ({ getNamedAccounts, deployments, network }) => {
     } else {
         ethUsdPriceFeedAddress = networkConfig[chainId].ethUsdPriceFeed!;
     }
-    console.log("after if else");
 
     // chainId = X => address A
     // chainId = Y => address B
@@ -28,7 +27,7 @@ module.exports = async ({ getNamedAccounts, deployments, network }) => {
         waitConfirmations: networkConfig[chainId].blockConfirmations || 1
     });
     if (chainId !== 31337 && process.env.ETHERSCAN_API_KEY) {
-        log("trying to verify");
+        log("trying to verify because were on a testtnetwork");
         await verify(fundMe.address, args);
         log("-----------------------------------------------------");
     }
