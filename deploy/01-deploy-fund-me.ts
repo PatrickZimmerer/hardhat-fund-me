@@ -1,5 +1,5 @@
 import { verify } from "../utils/verify";
-import { networkConfig, developmentChains } from "../helper-hardhat-config";
+import { networkConfig } from "../helper-hardhat-config";
 
 module.exports = async ({ getNamedAccounts, deployments, network }) => {
     const { deploy, log } = deployments;
@@ -24,7 +24,7 @@ module.exports = async ({ getNamedAccounts, deployments, network }) => {
         from: deployer,
         args: [ethUsdPriceFeedAddress],
         log: true,
-        waitConfirmations: networkConfig[chainId].blockConfirmations || 1
+        waitConfirmations: networkConfig[chainId]?.blockConfirmations || 1
     });
     if (chainId !== 31337 && process.env.ETHERSCAN_API_KEY) {
         log("trying to verify because were on a testtnetwork");
