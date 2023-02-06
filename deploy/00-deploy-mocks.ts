@@ -1,26 +1,31 @@
-import {
-    developmentChains,
-    DECIMALS,
-    INITIAL_ANSWER
-} from "../helper-hardhat-config";
+import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { DeployFunction } from "hardhat-deploy/types";
 
-module.exports = async ({ getNamedAccounts, deployments, network }) => {
+const DECIMALS = "18";
+const INITIAL_PRICE = "2000000000000000000000"; // 2000
+const deployMocks = async ({ getNamedAccounts, deployments, network }) => {
     const { deploy, log } = deployments;
     const { deployer } = await getNamedAccounts();
     const chainId = network.config.chainId;
-    log("Chain Id is:", chainId);
-    log("Network.name is:", network.name);
-    if (chainId === 31337) {
-        log("Local network detected! Deploying mocks...!");
+    // If we are on a local development network, we need to deploy mocks!
+    if (chainId == 31337) {
+        log("Local network detected! Deploying mocks...");
         await deploy("MockV3Aggregator", {
             contract: "MockV3Aggregator",
             from: deployer,
             log: true,
-            args: [DECIMALS, INITIAL_ANSWER]
+            args: [DECIMALS, INITIAL_PRICE]
         });
-        log("Mocks deployed!");
-        log("----------------------------------------------------");
+        log("Mocks Deployed!");
+        log("----------------------------------");
+        log(
+            "You are deploying to a local network, you'll need a local network running to interact"
+        );
+        log(
+            "Please run `yarn hardhat console` to interact with the deployed smart contracts!"
+        );
+        log("----------------------------------");
     }
 };
-
-module.exports.tags = ["all", "mocks"];
+export default deployMocks;
+deployMocks.tags = ["all", "mocks"];

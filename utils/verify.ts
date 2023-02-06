@@ -1,6 +1,6 @@
 import { run } from "hardhat";
 
-async function verify(contractAddress: any, args: any) {
+const verify = async (contractAddress: any, args: any) => {
     console.log("Veryfying contract...", { contractAddress, args });
     try {
         await run("verify:verify", {
@@ -14,6 +14,6 @@ async function verify(contractAddress: any, args: any) {
             console.log(error);
         }
     }
-}
+};
 
-module.exports = { verify };
+export default verify;
