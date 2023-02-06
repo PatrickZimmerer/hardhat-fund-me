@@ -1,8 +1,18 @@
-import { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox";
-import "hardhat-deploy";
+import "@typechain/hardhat";
+import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
+import "@nomiclabs/hardhat-ethers";
+import "hardhat-gas-reporter";
 import * as dotenv from "dotenv";
+import "hardhat-deploy";
+import "solidity-coverage";
+import { HardhatUserConfig } from "hardhat/config";
 dotenv.config();
+// You need to export an object to set up your config
+// Go to https://hardhat.org/config/ to learn more
+/**
+ * @type import('hardhat/config').HardhatUserConfig
+ */
 
 const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || "https://eth-goerli";
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "0xkey";

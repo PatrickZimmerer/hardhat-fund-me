@@ -24,7 +24,9 @@
     "typescript": ">=4.5.0"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
     "dotenv": "^16.0.3",
+    "hardhat-waffle": "^0.0.1-security",
     "solhint": "^3.3.8"
   }
 }
