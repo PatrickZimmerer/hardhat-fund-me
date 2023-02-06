@@ -1,26 +1,24 @@
-const networkConfig = {
-    5: {
-        name: "goerli",
+export interface networkConfigItem {
+    ethUsdPriceFeed?: string;
+    blockConfirmations?: number;
+}
+
+export interface networkConfigInfo {
+    [key: string]: networkConfigItem;
+}
+
+export const networkConfig: networkConfigInfo = {
+    localhost: {},
+    hardhat: {},
+    // Price Feed Address, values can be obtained at https://docs.chain.link/docs/reference-contracts
+    // Default one is ETH/USD contract on Kovan
+    goerli: {
         ethUsdPriceFeed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e",
         blockConfirmations: 6
-    },
-    137: {
-        name: "polygon",
-        ethUsdPriceFeed: "0xF9680D99D6C9589e2a93a78A04A279e509205945"
-    },
-    31337: {
-        name: "hardhat-local",
-        ethUsdPriceFeed: "0xF9680D99D6C9589e2a93a78A04A279e509205945",
-        blockConfirmations: 2
     }
 };
 
-const developmentChains = ["hardhat", "localhost"];
-const DECIMALS = 8;
-const INITIAL_ANSWER = 200000000000;
+export const DECIMALS = 8;
+export const INITIAL_ANSWER = 200000000000;
 
-module.exports = {
-    networkConfig,
-    DECIMALS,
-    INITIAL_ANSWER
-};
+export const developmentChains = ["hardhat", "localhost"];
