@@ -22,12 +22,12 @@ contract FundMe {
     using PriceConverter for uint256;
 
     // State Variables
-    mapping(address => uint256) public s_addressToAmountFunded;
-    address[] public s_funders;
+    mapping(address => uint256) private s_addressToAmountFunded;
+    address[] private s_funders;
 
-    address public immutable i_owner;
+    address private immutable i_owner;
     uint256 public constant MINIMUM_USD = 50 * 1e18;
-    AggregatorV3Interface public s_priceFeed;
+    AggregatorV3Interface private s_priceFeed;
 
     // Events / Modifiers
     modifier onlyOwner() {
@@ -84,5 +84,42 @@ contract FundMe {
             value: address(this).balance
         }("");
         require(callSuccess, "Call failed");
+    }
+
+    /// @notice This functions is used to withdraw the funds in this contract
+    /// @dev This resets the s_funders array
+    function cheaperWithdraw() public payable onlyOwner {
+        address[] memory funders = s_funders;
+
+        // mappings can't be in memory!! Arrays can!!
+        for (uint256 i = 0; i < funders.length; i++) {
+            address funder = funders[i];
+            s_addressToAmountFunded[funder] = 0;
+        }
+
+        s_funders = new address[](0);
+
+        (bool callSuccess, ) = payable(msg.sender).call{
+            value: address(this).balance
+        }("");
+        require(callSuccess, "Call failed");
+    }
+
+    function getOwner() public view returns (address) {
+        return i_owner;
+    }
+
+    function getFunders(uint256 index) public view returns (address) {
+        return s_funders[index];
+    }
+
+    function getAddressToAmountFunded(
+        address funder
+    ) public view returns (uint256) {
+        return s_addressToAmountFunded[funder];
+    }
+
+    function getPriceFeed() public view returns (AggregatorV3Interface) {
+        return s_priceFeed;
     }
 }
