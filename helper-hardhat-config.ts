@@ -14,7 +14,7 @@ export const networkConfig: networkConfigInfo = {
     // Default one is ETH/USD contract on Kovan
     goerli: {
         ethUsdPriceFeed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e",
-        blockConfirmations: 6
+        blockConfirmations: 1
     }
 };
 
