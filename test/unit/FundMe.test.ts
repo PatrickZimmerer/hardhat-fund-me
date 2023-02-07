@@ -30,7 +30,7 @@ describe("FundMe", function() {
 
         describe("fund", function() {
             it("Fails if you don't send enough ETH", async function() {
-                await expect(fundMe.fund()).to.be.revertedWith(
+                await expect(fundMe.fund()).to.be.rejectedWith(
                     "You need to spend more ETH!"
                 );
             });
@@ -138,7 +138,7 @@ describe("FundMe", function() {
                         .toString(),
                     endingDeployerBalance.add(withdrawGasCost).toString()
                 );
-                await expect(fundMe.getFunders(0)).to.be.reverted;
+                await expect(fundMe.getFunders(0)).to.be.rejected;
                 assert.equal(
                     (
                         await fundMe.getAddressToAmountFunded(
@@ -218,7 +218,7 @@ describe("FundMe", function() {
                     endingDeployerBalance.add(gasCost).toString()
                 );
 
-                await expect(fundMe.getFunders(0)).to.be.reverted;
+                await expect(fundMe.getFunders(0)).to.be.rejected;
 
                 for (let i = 1; i < 6; i++) {
                     assert.equal(
