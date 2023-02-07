@@ -22,7 +22,11 @@ const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "key";
 const config: HardhatUserConfig = {
     defaultNetwork: "hardhat",
     solidity: {
-        compilers: [{ version: "0.8.8" }, { version: "0.6.6" }]
+        compilers: [
+            { version: "0.8.8" },
+            { version: "0.6.6" },
+            { version: "0.7.0" }
+        ]
     },
     networks: {
         goerli: {
@@ -50,6 +54,9 @@ const config: HardhatUserConfig = {
         deployer: {
             default: 0
         }
+    },
+    paths: {
+        tests: "./test/smartcontract"
     }
 };
 
